@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="org.glassfish:jsonp-jaxrs:1.0" type="repository">
+    <properties maven-id="org.glassfish:jsonp-jaxrs:1.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/jsonp-jaxrs/1.0/jsonp-jaxrs-1.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/ws/rs/javax.ws.rs-api/2.0/javax.ws.rs-api-2.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/json/javax.json-api/1.0/javax.json-api-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/jsonp-jaxrs/1.0/jsonp-jaxrs-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/glassfish/jsonp-jaxrs/1.0/jsonp-jaxrs-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
