@@ -1,0 +1,38 @@
+
+    30 black
+    31 red
+    32 green
+    33 yellow
+    34 blue
+    35 magenta
+    36 cyan
+    37 white
+    40 black background
+    41 red background
+    42 green background
+    43 yellow background
+    44 blue background
+    45 magenta background
+    46 cyan background
+    47 white background
+    1 make bright (usually just bold)
+    21 stop bright (normalizes boldness)
+    4 underline
+    24 stop underline
+    0 clear all formatting
+
+
+
+So, System.out.println((char)27 + "[34;43mBlue text with yellow background"); will give you blue text with a yellow background.
+
+Also, note that (as mentioned in the above hyperlinked table) there are many attribute-changing sequences that do not work, but on most platforms the color changing attributes will work. I would recommend trying these different escape sequences on your computer but please note that this will not be portable.
+
+You can, additionally, just use escape sequences like "\e[31;1m". So if you do printf "\e[31;1mWhat color?\e[0m"; in your unix terminal (don't do this in java System.out.println("\e[31;1mred\e[0m");... it will give you an illegal escape character compilation error), you will see What color? in bright red. "\e[31;1m" and "\x1b[31;1m" are equivalent in Linux, however I think the Mac terminal only supports "\e[31;1m". (This is actually based on the shell that is being run, so "\e[...m" will only work in shells that support escape sequences - which, I would think, would be most of them).
+
+Also on most Linux distributions, you can do Ctrlv+ctrl[. This does the same thing as "\e". Therefore, you can do echo "^[[34;1mWhat color?^[[0m" and you will see What color? in bright blue. The ^[ is where you must do ctrlv+ctrl[.
+
+For those of you that know Linux a little, you might know that echo does not interpret escape sequences like printf. echo -e does but not just echo. In the example above, I just did an escape sequence with plain old echo and yet I saw color. "How does this work?" you might ask. When you do ctrlv+ctrl[ you are printing just one character. So, echo doesn't interpret an escape sequence, it just takes that character (which is technically an escape character, I guess, just like doing (char)27 + "..." in java, but we aren't in java) and writes it to stdout.
+
+This can be useful for shells that don't actually interpret escape sequences. For example, go to your Unix terminal (it probably runs bash when you start) and then type bash. This will give you a bash shell. If you do printf "\e[31;1mred?\e[0m\n"; it will print red? in bright red. To exit type exit. Now type sh to run a sh shell. Again type printf "\e31;1mred?\e[0m\n"; and you will see \e[31;1mred?\e[0m that is not in red. The sh shell apparently doesn't interpret the escape sequences, but it clearly reads characters, so we could force the color by doing ctrlv+ctrl[. So, printf "^[[31;1mred?^[[0m\n" would in fact yieldred?` in bright red. :D
+
+ONE LAST NOTE: You can use 256 colors in terminals that support this (gnome-terminal, xterm, konsole, etc. - i.e. most x-window terminals). To view all of these colors, just run this in your terminal: for i in {1..255}; do printf "\e[0m$i: \e[38;05;${i}mCOLOR TEST 123\n"; done;
